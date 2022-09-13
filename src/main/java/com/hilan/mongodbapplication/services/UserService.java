@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hilan.mongodbapplication.Entity.User;
+import com.hilan.mongodbapplication.dto.UserDTO;
 import com.hilan.mongodbapplication.repository.UserRepository;
 import com.hilan.mongodbapplication.services.exceptions.ObjectNotFoundException;
 
@@ -23,5 +24,13 @@ public class UserService {
 	public User findById(String id) {
 		Optional<User> user = repository.findById(id);
 		return user.orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado"));
+	}
+	
+	public User insert(User user) {
+		return repository.insert(user);
+	}
+	
+	public User fromDto(UserDTO dto) {
+		return new User(dto.getId(), dto.getName(), dto.getEmail());
 	}
 }
