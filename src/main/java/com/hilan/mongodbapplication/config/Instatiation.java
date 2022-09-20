@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import com.hilan.mongodbapplication.Entity.Post;
 import com.hilan.mongodbapplication.Entity.User;
 import com.hilan.mongodbapplication.dto.AuthorDTO;
+import com.hilan.mongodbapplication.dto.CommentDTO;
 import com.hilan.mongodbapplication.repository.PostRepository;
 import com.hilan.mongodbapplication.repository.UserRepository;
 
@@ -38,6 +39,12 @@ public class Instatiation implements CommandLineRunner {
 		Post p2 = new Post(null, "Cheguei", "Maria chegando", new Date(), new AuthorDTO(maria));
 		Post p3 = new Post(null, "Julia na área", "Olá gente", new Date(), new AuthorDTO(julia));
 		Post p4 = new Post(null, "Bom dia", "Hoje eu acordei feliz", new Date(), new AuthorDTO(maria));
+		
+		CommentDTO c1 = new CommentDTO("Bom dia linda", new Date(), new AuthorDTO(ana));
+		p4.getComments().add(c1);
+		
+		CommentDTO c2 = new CommentDTO("Exibida", new Date(), new AuthorDTO(carlos));
+		p1.getComments().add(c2);
 		
 		postRepository.saveAll(Arrays.asList(p1, p2, p3, p4));
 		
